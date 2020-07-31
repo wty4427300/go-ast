@@ -20,7 +20,8 @@ func main() {
 	//parserImport()
 	//parserType()
 	//parserConst()
-	parserVar()
+	//parserVar()
+	ParserFunc()
 	//fmt.Println("vscode")
 }
 
@@ -36,7 +37,7 @@ func parserIdent() {
 	ast.Print(nil, expr)
 }
 
-func fsetInit(mode parser.Mode, src interface{}) *ast.File {
+func FsetInit(mode parser.Mode, src interface{}) *ast.File {
 	fset := token.NewFileSet()
 	file, err := parser.ParseFile(fset, "hello.go", src, mode)
 	if err != nil {
@@ -193,7 +194,7 @@ const Pi = 3.14
 const E float64 = 2.71828`
 
 func parserConst() {
-	file := fsetInit(parser.AllErrors, src3)
+	file := FsetInit(parser.AllErrors, src3)
 	for _, decl := range file.Decls {
 		if genDecl, ok := decl.(*ast.GenDecl); ok {
 			for _, spec := range genDecl.Specs {
@@ -216,7 +217,7 @@ var (
 
 //变量的解析和常亮差不多,import,type,var,const都在ast.decls
 func parserVar() {
-	file := fsetInit(parser.AllErrors, src5)
+	file := FsetInit(parser.AllErrors, src5)
 	for _, decl := range file.Decls {
 		if genDecl, ok := decl.(*ast.GenDecl); ok {
 			for _, spec := range genDecl.Specs {
