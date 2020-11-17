@@ -21,7 +21,8 @@ func main() {
 	//parserType()
 	//parserConst()
 	//parserVar()
-	ParserFunc()
+	//ParserFunc()
+	//parserPointer()
 	//fmt.Println("vscode")
 }
 
@@ -225,5 +226,37 @@ func parserVar() {
 				ast.Print(nil, spec)
 			}
 		}
+	}
+}
+
+var (
+	name = 1
+	wty  = 2
+	xzc  = 3
+)
+
+type wh func(...string) string
+type Wty (int)
+type ssw int
+type Xzx = int
+type mgdl Wty
+type Lcz Xzx
+type (
+	lczsb int
+	xczhh = int8
+)
+
+const src7 = `package foo
+type IntPtr *int
+`
+
+func parserPointer() {
+	fileSet := token.NewFileSet()
+	file, err := parser.ParseFile(fileSet, "hello.go", src7, parser.AllErrors)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, decl := range file.Decls {
+		ast.Print(nil, decl.(*ast.GenDecl).Specs[0])
 	}
 }
